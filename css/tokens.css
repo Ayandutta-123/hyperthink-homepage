@@ -1,0 +1,198 @@
+/* ==========================================================================
+   HyperThink Systems — Design tokens
+   The ONLY file in this project allowed to contain raw colour values.
+   Every other stylesheet references these custom properties.
+   Brand values are taken from the production logo.svg and theme style.css —
+   do not tint, substitute or "modernise" them.
+   ========================================================================== */
+
+:root {
+  /* ------------------------------------------------------------------
+     1. Colour — core brand
+     ------------------------------------------------------------------ */
+  --ht-red:        #C1262A;  /* logo mark, primary CTA, accents. 5.87:1 on white */
+  --ht-navy:       #252A61;  /* logo wordmark, dark sections. 13.27:1 on white */
+  --ht-navy-alt:   #292B62;  /* theme navy variant — section backgrounds */
+  --ht-navy-soft:  #333A65;  /* body copy on light. 10.86:1 on white */
+  --ht-amber:      #FFAC00;  /* bands, rules, icon fills, focus. NEVER text on light (1.88:1) */
+
+  /* ------------------------------------------------------------------
+     2. Colour — derived neutrals (no new hues)
+     ------------------------------------------------------------------ */
+  --ht-ink:        #1A1E47;  /* darkened navy — hero and closing CTA */
+  --ht-slate:      #5B6280;  /* secondary text, >= 16px only. 5.99:1 white, 5.55:1 mist */
+  --ht-line:       #E3E6EF;  /* hairlines, card borders */
+  --ht-mist:       #F5F6FA;  /* alternating light section */
+  --ht-grey-100:   #F1F1F1;  /* existing theme grey */
+  --ht-red-soft:   #FCECEE;  /* soft red tint — icon tiles on white cards */
+  --ht-amber-50:   #FFF7E6;  /* amber tint — source chips & icon tiles on white cards */
+  --ht-navy-300:   #5A60A0;  /* lightened navy — wireframe strokes on ink (decorative only) */
+  --ht-white:      #FFFFFF;
+
+  /* ------------------------------------------------------------------
+     3. Colour — state
+     ------------------------------------------------------------------ */
+  --ht-red-hover:  #A81F23;  /* white on this = 7.28:1 */
+  --ht-focus:      #FFAC00;  /* 8.45:1 on ink, 7.05:1 on navy, visible ring on white */
+
+  /* ------------------------------------------------------------------
+     4. Colour — alpha variants (kept here so no rgba() leaks into other files)
+     ------------------------------------------------------------------ */
+  --ht-white-82:   rgba(255, 255, 255, .82);  /* body text on navy / ink */
+  --ht-white-64:   rgba(255, 255, 255, .64);  /* captions on navy / ink, >= 14px */
+  --ht-white-16:   rgba(255, 255, 255, .16);  /* hairlines on dark */
+  --ht-white-12:   rgba(255, 255, 255, .12);  /* hero tile hover */
+  --ht-white-08:   rgba(255, 255, 255, .08);  /* glass fill on dark */
+  --ht-white-06:   rgba(255, 255, 255, .06);  /* hero blueprint grid, hero tiles */
+  --ht-red-32:     rgba(193, 38, 42, .32);    /* hero glow (decorative) */
+  --ht-amber-14:   rgba(255, 172, 0, .14);    /* hero glow (decorative) */
+  --ht-navy-70:    rgba(37, 42, 97, .70);     /* duotone multiply overlay */
+  --ht-ink-85:     rgba(26, 30, 71, .85);     /* photo scrim start */
+  --ht-ink-00:     rgba(26, 30, 71, 0);       /* photo scrim end */
+  --ht-scrim:      linear-gradient(to top, var(--ht-ink-85), var(--ht-ink-00) 60%);
+  --ht-mesh:       radial-gradient(60% 80% at 85% 20%, rgba(41, 43, 98, .55), transparent 70%),
+                   radial-gradient(50% 60% at 10% 90%, rgba(37, 42, 97, .45), transparent 70%);
+  --ht-hero-glow:  radial-gradient(32% 40% at 70% 62%, var(--ht-amber-14), transparent 70%);
+
+  /* ------------------------------------------------------------------
+     5. Colour — semantic roles (components use these, not the raw brand names)
+     ------------------------------------------------------------------ */
+  --ht-text:             var(--ht-navy);       /* long-form body on light */
+  --ht-text-soft:        var(--ht-navy-soft);  /* card descriptions */
+  --ht-text-muted:       var(--ht-slate);
+  --ht-text-on-dark:     var(--ht-white);
+  --ht-text-on-dark-2:   var(--ht-white-82);
+  --ht-accent-on-dark:   var(--ht-amber);      /* eyebrows, numerals on navy/ink */
+  --ht-link:             var(--ht-red);        /* light backgrounds only — red fails on navy (2.26:1) and ink (2.71:1) */
+  --ht-bg:               var(--ht-white);
+  --ht-bg-alt:           var(--ht-mist);
+  --ht-bg-dark:          var(--ht-navy);
+  --ht-bg-darkest:       var(--ht-ink);
+  --ht-placeholder-bg:   #FFF3D6;              /* [VERIFY] / [CLIENT TO SUPPLY] markers — must look unfinished */
+  --ht-placeholder-ink:  var(--ht-ink);
+  --ht-placeholder-edge: var(--ht-red);
+
+  /* ------------------------------------------------------------------
+     6. Typography — Montserrat only
+     ------------------------------------------------------------------ */
+  --ht-font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ht-fw-regular:  400;
+  --ht-fw-medium:   500;
+  --ht-fw-semibold: 600;
+  --ht-fw-bold:     700;
+  --ht-fw-black:    800;
+
+  --ht-fs-eyebrow:  0.8125rem;                          /* 13px; 12px on mobile */
+  --ht-fs-h1:       clamp(2.4rem, 3.6vw, 3.25rem);       /* 52px max keeps the H1 at 3 lines beside the hero art */
+  --ht-fs-h1-mobile: 2rem;                              /* 32px, below 768px */
+  --ht-fs-h2:       clamp(1.9rem, 2.8vw, 2.6rem);
+  --ht-fs-h2-small: 1.25rem;                            /* social-proof line */
+  --ht-fs-h3:       clamp(1.25rem, 1.1rem + .3vw, 1.375rem); /* 20 → 22px */
+  --ht-fs-lead:     clamp(1.125rem, 1.05rem + .25vw, 1.25rem); /* 18 → 20px */
+  --ht-fs-lead-mobile: 1rem;                            /* 16px, below 768px */
+  --ht-fs-body:     1rem;                               /* 16px */
+  --ht-fs-small:    0.875rem;                           /* 14px */
+  --ht-fs-button:   0.9375rem;                          /* 15px */
+  --ht-fs-stat:     clamp(2.5rem, 4vw, 3.5rem);
+
+  --ht-lh-tight:    1.15;
+  --ht-lh-heading:  1.25;
+  --ht-lh-body:     1.7;
+  --ht-lh-small:    1.6;
+
+  --ht-ls-eyebrow:  0.12em;
+  --ht-ls-h1:      -0.02em;
+  --ht-ls-h2:      -0.015em;
+  --ht-ls-h3:      -0.01em;
+  --ht-ls-button:   0.02em;
+
+  --ht-measure:     68ch;  /* max body line length */
+
+  /* ------------------------------------------------------------------
+     7. Spacing — 8pt scale
+     ------------------------------------------------------------------ */
+  --ht-space-1:   8px;
+  --ht-space-2:  16px;
+  --ht-space-3:  24px;
+  --ht-space-4:  32px;
+  --ht-space-5:  48px;
+  --ht-space-6:  64px;
+  --ht-space-7:  80px;
+  --ht-space-8: 120px;
+
+  --ht-section-y-desktop: 96px;
+  --ht-section-y-tablet:  64px;
+  --ht-section-y-mobile:  48px;
+  --ht-section-y:         var(--ht-section-y-mobile); /* mobile-first; raised in style.css media queries */
+
+  /* ------------------------------------------------------------------
+     8. Layout — aligned to Elementor breakpoints
+        Mobile <= 767 · Tablet 768–1024 · Desktop >= 1025
+        (custom properties cannot be used inside @media, so the px values
+        are repeated in style.css; keep them in sync with this comment)
+     ------------------------------------------------------------------ */
+  --ht-container:        1200px;
+  --ht-gutter-desktop:   24px;
+  --ht-gutter-tablet:    32px;
+  --ht-gutter-mobile:    16px;
+  --ht-gutter:           var(--ht-gutter-mobile);
+  --ht-grid-gap-desktop: 24px;
+  --ht-grid-gap-tablet:  20px;
+  --ht-grid-gap-mobile:  16px;
+
+  --ht-header-h:         72px;
+  --ht-header-h-shrunk:  60px;
+  --ht-announce-h:       44px;
+
+  --ht-logo-w-desktop:   204px; /* brand minimum; never smaller */
+  --ht-logo-w-mobile:    156px;
+  --ht-logo-ratio:       211 / 35;
+
+  --ht-logo-box-w:       160px; /* partner logo strip */
+  --ht-logo-box-h:       56px;
+
+  --ht-touch-min:        44px;
+
+  /* ------------------------------------------------------------------
+     9. Shape and depth — near-flat
+     ------------------------------------------------------------------ */
+  --ht-radius-btn: 2px;   /* buttons — neutral enterprise convention */
+  --ht-radius-sm:  4px;   /* inputs, chips */
+  --ht-radius-md:  8px;   /* cards */
+  --ht-radius-lg:  12px;  /* feature panels, media */
+  --ht-radius-pill: 999px;
+
+  --ht-shadow-1: 0 1px 2px rgba(37, 42, 97, .06), 0 2px 8px rgba(37, 42, 97, .06);
+  --ht-shadow-2: 0 8px 24px rgba(37, 42, 97, .10);
+  --ht-shadow-float: 0 24px 48px rgba(8, 10, 36, .45), 0 2px 6px rgba(8, 10, 36, .25); /* hero UI cards on ink */
+  --ht-border:   1px solid var(--ht-line);
+  --ht-border-dark: 1px solid var(--ht-white-16);
+
+  /* ------------------------------------------------------------------
+     10. Motion — must match Elementor's native controls
+     ------------------------------------------------------------------ */
+  --ht-ease:          ease-out;
+  --ht-dur-hover:     200ms;
+  --ht-dur-panel:     300ms;
+  --ht-dur-max:       400ms;   /* nothing slower */
+  --ht-lift:          -4px;    /* card hover */
+  --ht-press:         1px;     /* button active */
+  --ht-stagger:       100ms;   /* within a row only */
+  /* Hero ambient loops (float, packets, perimeter) are the one exception to
+     --ht-dur-max: slow, small, transform/opacity only, off under reduced motion. */
+
+  /* ------------------------------------------------------------------
+     11. Focus
+     ------------------------------------------------------------------ */
+  --ht-focus-ring:    3px solid var(--ht-focus);
+  --ht-focus-offset:  2px;
+
+  /* ------------------------------------------------------------------
+     12. Layers
+     ------------------------------------------------------------------ */
+  --ht-z-header:  100;
+  --ht-z-menu:    110;
+  --ht-z-drawer:  200;
+  --ht-z-skip:    300;
+}

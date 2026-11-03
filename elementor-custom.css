@@ -1,0 +1,972 @@
+/* ==========================================================================
+   HyperThink Systems — Elementor custom CSS
+   Paste into: Elementor → Site Settings → Custom CSS (Elementor Pro).
+   Every rule is scoped to an .ht- class that the operator types into a
+   widget's or container's Advanced → CSS Classes field, so nothing here
+   touches the theme or other pages.
+   Requires: Elementor 3.16+ with Flexbox Containers, Elementor Pro.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Tokens (mirror of css/tokens.css — keep in sync)
+   -------------------------------------------------------------------------- */
+:root {
+  --ht-red:        #C1262A;
+  --ht-navy:       #252A61;
+  --ht-navy-alt:   #292B62;
+  --ht-navy-soft:  #333A65;
+  --ht-amber:      #FFAC00;
+  --ht-ink:        #1A1E47;
+  --ht-slate:      #5B6280;
+  --ht-line:       #E3E6EF;
+  --ht-mist:       #F5F6FA;
+  --ht-white:      #FFFFFF;
+  --ht-navy-300:   #5A60A0;
+  --ht-red-hover:  #A81F23;
+  --ht-focus:      #FFAC00;
+
+  --ht-white-82:   rgba(255, 255, 255, .82);
+  --ht-white-64:   rgba(255, 255, 255, .64);
+  --ht-white-16:   rgba(255, 255, 255, .16);
+  --ht-white-12:   rgba(255, 255, 255, .12);
+  --ht-white-08:   rgba(255, 255, 255, .08);
+  --ht-white-06:   rgba(255, 255, 255, .06);
+  --ht-red-32:     rgba(193, 38, 42, .32);
+  --ht-red-soft:   #FCECEE;
+  --ht-amber-14:   rgba(255, 172, 0, .14);
+  --ht-amber-50:   #FFF7E6;
+  --ht-navy-70:    rgba(37, 42, 97, .70);
+  --ht-placeholder-bg: #FFF3D6;
+  --ht-mesh: radial-gradient(60% 80% at 85% 20%, rgba(41, 43, 98, .55), transparent 70%),
+             radial-gradient(50% 60% at 10% 90%, rgba(37, 42, 97, .45), transparent 70%);
+  --ht-hero-glow: radial-gradient(32% 40% at 70% 62%, var(--ht-amber-14), transparent 70%);
+  --ht-shadow-float: 0 24px 48px rgba(8, 10, 36, .45), 0 2px 6px rgba(8, 10, 36, .25);
+  --ht-border: 1px solid var(--ht-line);
+  --ht-border-dark: 1px solid var(--ht-white-16);
+  --ht-radius-pill: 999px;
+  --ht-fw-medium: 500;
+  --ht-fw-semibold: 600;
+  --ht-fw-bold: 700;
+  --ht-fs-small: 0.875rem;
+  --ht-space-2: 16px;
+  --ht-space-3: 24px;
+  --ht-space-4: 32px;
+  --ht-space-5: 48px;
+  --ht-lift: -4px;
+  --ht-press: 1px;
+  --ht-text-on-dark: var(--ht-white);
+
+  --ht-font: 'Montserrat', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --ht-radius-btn: 2px;
+  --ht-radius-sm:  4px;
+  --ht-radius-md:  8px;
+  --ht-radius-lg:  12px;
+  --ht-shadow-1: 0 1px 2px rgba(37, 42, 97, .06), 0 2px 8px rgba(37, 42, 97, .06);
+  --ht-shadow-2: 0 8px 24px rgba(37, 42, 97, .10);
+
+  --ht-ease:      ease-out;
+  --ht-dur-hover: 200ms;
+  --ht-dur-panel: 300ms;
+  --ht-touch-min: 44px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Focus — amber ring on every interactive element inside HyperThink blocks
+   -------------------------------------------------------------------------- */
+.ht-section :focus-visible,
+.ht-header :focus-visible,
+.ht-footer :focus-visible,
+.ht-announce :focus-visible {
+  outline: 3px solid var(--ht-focus);
+  outline-offset: 2px;
+}
+
+.ht-sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. Section backgrounds
+   -------------------------------------------------------------------------- */
+.ht-section.ht-bg-ink   { background: var(--ht-mesh), var(--ht-ink); }
+.ht-section.ht-bg-navy  { background: var(--ht-navy); }
+.ht-section.ht-bg-mist  { background: var(--ht-mist); }
+
+/* --------------------------------------------------------------------------
+   4. Typography (Heading widget). Set the HTML tag in the widget:
+      eyebrow = p, section title = h2, card title = h3.
+   -------------------------------------------------------------------------- */
+.ht-eyebrow .elementor-heading-title {
+  font-family: var(--ht-font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  line-height: 1.6;
+  color: var(--ht-red);
+}
+.ht-bg-ink .ht-eyebrow .elementor-heading-title,
+.ht-bg-navy .ht-eyebrow .elementor-heading-title { color: var(--ht-amber); }
+
+.ht-h1 .elementor-heading-title {
+  font-size: clamp(2.4rem, 3.6vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+.ht-h2 .elementor-heading-title {
+  font-size: clamp(1.9rem, 2.8vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+  color: var(--ht-navy);
+}
+.ht-bg-ink .ht-h1 .elementor-heading-title,
+.ht-bg-ink .ht-h2 .elementor-heading-title,
+.ht-bg-navy .ht-h2 .elementor-heading-title { color: var(--ht-white); }
+
+.ht-lead, .ht-lead p { font-size: clamp(1.125rem, 1.05rem + .25vw, 1.25rem); line-height: 1.7; max-width: 68ch; }
+.ht-bg-ink .ht-lead, .ht-bg-navy .ht-lead { color: var(--ht-white-82); }
+
+.ht-label .elementor-heading-title {
+  font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ht-slate);
+}
+
+/* "NEW" chip — typed inside a Heading title as <span class="ht-new">New</span> */
+.ht-new {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  vertical-align: middle;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--ht-ink);
+  background: var(--ht-amber);
+  border-radius: var(--ht-radius-sm);
+}
+
+/* Visible "fill before launch" marker */
+.ht-placeholder {
+  padding: 0 .3em;
+  background: var(--ht-placeholder-bg);
+  color: var(--ht-ink);
+  outline: 2px dashed var(--ht-red);
+  outline-offset: 1px;
+  border-radius: var(--ht-radius-btn);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   5. Buttons (Button widget) — default · hover · focus-visible · active · disabled
+   -------------------------------------------------------------------------- */
+.ht-btn-primary .elementor-button,
+.ht-btn-navy .elementor-button,
+.ht-btn-outline-light .elementor-button,
+.ht-btn-outline .elementor-button {
+  min-height: var(--ht-touch-min);
+  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  border-radius: var(--ht-radius-btn);
+  font-family: var(--ht-font);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1.2;
+  transition: background-color var(--ht-dur-hover) var(--ht-ease),
+              border-color var(--ht-dur-hover) var(--ht-ease),
+              color var(--ht-dur-hover) var(--ht-ease),
+              transform var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-btn-primary .elementor-button:active,
+.ht-btn-navy .elementor-button:active,
+.ht-btn-outline-light .elementor-button:active,
+.ht-btn-outline .elementor-button:active { transform: translateY(1px); }
+
+.ht-btn-primary .elementor-button { background: var(--ht-red); color: var(--ht-white); }
+.ht-btn-primary .elementor-button:hover { background: var(--ht-red-hover); color: var(--ht-white); transform: translateY(1px); }
+
+.ht-btn-navy .elementor-button { background: var(--ht-navy); color: var(--ht-white); }
+.ht-btn-navy .elementor-button:hover { background: var(--ht-ink); color: var(--ht-white); }
+
+.ht-btn-outline-light .elementor-button { background: transparent; border-color: var(--ht-white); color: var(--ht-white); }
+.ht-btn-outline-light .elementor-button:hover { background: var(--ht-white); color: var(--ht-ink); }
+
+.ht-btn-outline .elementor-button { background: transparent; border-color: var(--ht-navy); color: var(--ht-navy); }
+.ht-btn-outline .elementor-button:hover { background: var(--ht-navy); color: var(--ht-white); }
+
+.ht-btn-disabled .elementor-button { opacity: .55; cursor: not-allowed; pointer-events: none; }
+
+@media (max-width: 767px) {
+  .ht-btn-primary, .ht-btn-outline-light, .ht-btn-outline { width: 100%; }
+  .ht-btn-primary .elementor-button,
+  .ht-btn-outline-light .elementor-button,
+  .ht-btn-outline .elementor-button { width: 100%; white-space: normal; }
+}
+
+/* Text link (e.g. "View all news →") */
+.ht-text-link a, .ht-text-link .elementor-heading-title a {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: var(--ht-touch-min);
+  font-size: 15px; font-weight: 700;
+  color: var(--ht-red);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ht-text-link a:hover { color: var(--ht-red-hover); }
+
+/* --------------------------------------------------------------------------
+   6. Announcement bar (Popup → Top bar)
+   -------------------------------------------------------------------------- */
+.ht-announce { background: var(--ht-ink); color: var(--ht-white-82); font-size: 14px; border-bottom: var(--ht-border-dark); }
+.ht-announce .ht-announce-chip .elementor-heading-title {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ht-white);
+  background: var(--ht-white-12);
+  border: var(--ht-border-dark);
+  border-radius: var(--ht-radius-sm);
+}
+.ht-announce a { color: var(--ht-white); font-weight: 700; text-decoration: underline; }
+.ht-announce a:hover { color: var(--ht-amber); }
+
+/* Phones: one text run, no chip, so the bar takes 2–3 short lines instead of 4 */
+@media (max-width: 767px) {
+  .ht-announce, .ht-announce p { font-size: 13px; }
+  .ht-announce .ht-announce-chip { display: none; }
+  .ht-announce .e-con, .ht-announce .e-con-inner { display: block; min-height: 0; padding-block: 8px; }
+  .ht-announce .elementor-widget,
+  .ht-announce .elementor-widget-container,
+  .ht-announce p { display: inline; margin: 0; }
+  .ht-announce a { margin-left: 4px; }
+}
+
+/* --------------------------------------------------------------------------
+   7. Header (Theme Builder header, Sticky: Top, Effects Offset 100)
+   -------------------------------------------------------------------------- */
+.ht-header {
+  background: var(--ht-white);
+  min-height: 72px;
+  border-bottom: 1px solid transparent;
+  transition: min-height var(--ht-dur-panel) var(--ht-ease), border-color var(--ht-dur-panel) var(--ht-ease);
+}
+.ht-header.elementor-sticky--effects { min-height: 60px; border-bottom-color: var(--ht-line); }
+
+.ht-header .ht-logo img { width: 204px; height: auto; }
+@media (max-width: 767px) { .ht-header .ht-logo img { width: 156px; } }
+
+.ht-nav .elementor-item {
+  font-family: var(--ht-font);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ht-navy);
+  transition: color var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-nav .elementor-item:hover,
+.ht-nav .elementor-item.elementor-item-active { color: var(--ht-red); }
+
+@media (min-width: 1200px) and (max-width: 1319px) {
+  .ht-nav .elementor-item { font-size: 14px; }
+}
+
+/* Mega menu panel */
+.ht-mega {
+  background: var(--ht-white);
+  border: 1px solid var(--ht-line);
+  border-radius: var(--ht-radius-md);
+  box-shadow: var(--ht-shadow-2);
+}
+.ht-mega a { color: var(--ht-navy); font-weight: 500; }
+.ht-mega a:hover { color: var(--ht-red); text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
+   8. Hero — container .ht-section.ht-bg-ink.ht-hero
+      Right column: ht-hero-visual / ht-hero__visual
+        · HTML widget A (art):   ht-hero__layer--art
+        · HTML widget B (cards): ht-hero__layer--ui  (brand + 2 cards; no pill)
+      Paste SVG + cards from index.html. Rules mirror css/style.css.
+   -------------------------------------------------------------------------- */
+.ht-hero__audience {
+  margin-top: var(--ht-space-2);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--ht-white-64);
+}
+
+/* Phones: the primary CTA must sit inside the first screen (667px tall iPhone SE included) */
+@media (max-width: 767px) {
+  .ht-hero { padding-top: 32px; }
+  .ht-hero .ht-h1 .elementor-heading-title { font-size: 2rem; }
+  .ht-hero .ht-lead, .ht-hero .ht-lead p { margin-top: 0; font-size: 16px; line-height: 1.6; }
+  .ht-hero-eyebrow .elementor-heading-title { padding: 5px 12px 5px 9px; letter-spacing: .06em; white-space: nowrap; }
+  .ht-hero__brand { display: none; }
+}
+
+/* Elementor wrappers */
+.ht-hero-visual { position: relative; width: 100%; max-width: 600px; margin-inline: auto; }
+.ht-hero-visual .elementor-widget { margin: 0 !important; }
+.ht-hero-eyebrow .elementor-heading-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 14px 6px 10px;
+  background: var(--ht-white-08);
+  border: var(--ht-border-dark);
+  border-radius: var(--ht-radius-pill);
+}
+
+/* Identical to css/style.css from here */
+.ht-hero {
+  position: relative;
+  isolation: isolate;
+  padding-bottom: var(--ht-space-4);
+  background: var(--ht-mesh), var(--ht-ink);
+  color: var(--ht-text-on-dark);
+  overflow: hidden;
+}
+.ht-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .55;
+  background-image:
+    linear-gradient(var(--ht-white-06) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ht-white-06) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(50% 55% at 78% 48%, black, transparent 75%);
+  mask-image: radial-gradient(50% 55% at 78% 48%, black, transparent 75%);
+}
+.ht-hero::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -12%;
+  right: -8%;
+  width: 520px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--ht-red-32), transparent);
+  pointer-events: none;
+  animation: htDrift 16s ease-in-out infinite alternate;
+}
+.ht-hero__grid { display: grid; gap: var(--ht-space-5); align-items: center; }
+.ht-hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--ht-space-3);
+  padding: 6px 14px 6px 10px;
+  background: var(--ht-white-08);
+  border: var(--ht-border-dark);
+  border-radius: var(--ht-radius-pill);
+}
+.ht-hero .ht-h1 { color: var(--ht-white); }
+.ht-hl {
+  background-image: linear-gradient(var(--ht-red), var(--ht-red));
+  background-repeat: no-repeat;
+  background-position: 0 94%;
+  background-size: 100% .12em;
+  animation: htUnderline 900ms 300ms var(--ht-ease) both;
+}
+
+.ht-live {
+  position: relative;
+  flex: none;
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ht-amber);
+}
+.ht-live::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: inherit;
+  animation: htPing 2s var(--ht-ease) infinite;
+}
+
+.ht-hero__visual { position: relative; width: 100%; max-width: 600px; margin-inline: auto; }
+.ht-hero__stage { position: relative; }
+.ht-hero__layer { transition: transform 600ms var(--ht-ease); }
+.ht-hero__art { display: block; width: 100%; height: auto; overflow: visible; }
+
+.ht-hero__art * { vector-effect: non-scaling-stroke; }
+.ht-art__glow-stop { stop-color: var(--ht-amber); stop-opacity: .14; }
+.ht-art__glow-stop--end { stop-opacity: 0; }
+.ht-art__ground { fill: var(--ht-ink); opacity: .55; }
+.ht-art__floor { fill: none; stroke: var(--ht-navy-300); stroke-width: 1; opacity: .2; }
+.ht-art__perimeter {
+  fill: none;
+  stroke: var(--ht-amber);
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-dasharray: 3 8;
+  opacity: .7;
+  animation: htMarch 24s linear infinite;
+}
+.ht-art__rail { fill: none; stroke: var(--ht-navy-300); stroke-width: 1.25; stroke-dasharray: 3 4; opacity: .7; }
+.ht-art__top { fill: var(--ht-navy-soft); stroke: var(--ht-white-16); stroke-width: 1.75; }
+.ht-art__left { fill: var(--ht-navy-alt); stroke: var(--ht-white-16); stroke-width: 1.75; }
+.ht-art__right { fill: var(--ht-navy); stroke: var(--ht-white-16); stroke-width: 1.75; }
+.ht-art__line { fill: none; stroke: var(--ht-navy-300); stroke-width: 1.25; }
+.ht-art__tile { fill: var(--ht-navy); stroke: var(--ht-white-16); stroke-width: 1.5; }
+.ht-art__tile--active { fill: var(--ht-red); stroke: none; animation: htPulse 2.4s ease-in-out infinite; }
+.ht-art__data { fill: var(--ht-amber); stroke: none; }
+.ht-art__block { fill: var(--ht-red); stroke: none; }
+.ht-art__label { fill: var(--ht-white); font-family: var(--ht-font); font-size: 11px; font-weight: var(--ht-fw-bold); letter-spacing: .06em; }
+
+.ht-art__layer { animation: htLayerIn 700ms var(--ht-ease) both; }
+.ht-art__layer--2 { animation-delay: 120ms; }
+.ht-art__layer--3 { animation-delay: 240ms; }
+.ht-art__layer--4 { animation-delay: 360ms; }
+
+.ht-art__packet { fill: var(--ht-amber); animation: htPacket 3.6s linear infinite; }
+.ht-art__packet--2 { animation-delay: -1.2s; }
+.ht-art__packet--3 { animation-delay: -2.4s; }
+.ht-art__escape { fill: var(--ht-red); opacity: 0; animation: htEscape 4.8s ease-in infinite; }
+.ht-art__blocked { opacity: 0; transform-box: fill-box; transform-origin: center; animation: htBlocked 4.8s var(--ht-ease) infinite; }
+.ht-art__blocked circle { fill: var(--ht-red); }
+.ht-art__blocked path { fill: none; stroke: var(--ht-white); stroke-width: 2.25; stroke-linecap: round; }
+
+.ht-hero__layer--ui { display: grid; margin-top: var(--ht-space-2); gap: var(--ht-space-2); }
+.ht-hero__brand {
+  display: none;
+  margin: 0;
+  padding: 6px 12px;
+  font-size: .75rem;
+  font-weight: var(--ht-fw-bold);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ht-white);
+  background: var(--ht-white-08);
+  border: var(--ht-border-dark);
+  border-radius: var(--ht-radius-pill);
+  backdrop-filter: blur(6px);
+}
+.ht-hcard {
+  padding: 16px;
+  font-size: .875rem;
+  line-height: 1.45;
+  color: var(--ht-navy);
+  background: var(--ht-white);
+  border: 1px solid var(--ht-line);
+  border-radius: var(--ht-radius-lg);
+  box-shadow: var(--ht-shadow-float);
+}
+.ht-hcard--chat { display: none; }
+.ht-hcard__head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.ht-hcard__avatar {
+  flex: none;
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px;
+  color: var(--ht-white);
+  background: var(--ht-red);
+  border-radius: var(--ht-radius-md);
+}
+.ht-hcard__avatar--amber { color: var(--ht-ink); background: var(--ht-amber); }
+.ht-hcard__avatar .ht-icon { width: 18px; height: 18px; stroke-width: 2; }
+.ht-hcard__title { font-size: .9375rem; font-weight: var(--ht-fw-bold); color: var(--ht-navy); }
+.ht-hcard__meta { display: flex; align-items: center; gap: 6px; font-size: .75rem; font-weight: var(--ht-fw-semibold); color: var(--ht-navy-soft); }
+.ht-toggle {
+  position: relative;
+  flex: none;
+  margin-left: auto;
+  width: 34px; height: 20px;
+  background: var(--ht-red);
+  border-radius: var(--ht-radius-pill);
+}
+.ht-toggle::after {
+  content: "";
+  position: absolute;
+  top: 3px; right: 3px;
+  width: 14px; height: 14px;
+  background: var(--ht-white);
+  border-radius: 50%;
+}
+
+.ht-bubble { padding: 9px 11px; border-radius: 10px; }
+.ht-bubble--user {
+  margin-left: 28px;
+  color: var(--ht-white);
+  background: var(--ht-navy);
+  border-bottom-right-radius: 2px;
+  font-size: .8125rem;
+  font-weight: var(--ht-fw-semibold);
+}
+.ht-bubble--ai {
+  position: relative;
+  margin: 8px 12px 0 0;
+  min-height: 4.8em;
+  color: var(--ht-navy);
+  background: var(--ht-mist);
+  border-bottom-left-radius: 2px;
+}
+.ht-bubble__text { display: block; animation: htTextIn 8s ease-in-out infinite; }
+.ht-bubble__text strong { display: block; margin-bottom: 4px; font-size: .8125rem; color: var(--ht-navy); }
+.ht-bubble__points {
+  margin: 0;
+  padding-left: 1.1em;
+  font-size: .75rem;
+  font-weight: var(--ht-fw-medium);
+  color: var(--ht-navy-soft);
+}
+.ht-bubble__points li { margin: 0; }
+.ht-typing {
+  position: absolute;
+  left: 10px; top: 50%;
+  display: inline-flex; gap: 4px;
+  transform: translateY(-50%);
+  animation: htTypingOut 8s ease-in-out infinite;
+}
+.ht-typing i { width: 6px; height: 6px; border-radius: 50%; background: var(--ht-navy-300); animation: htDot 900ms ease-in-out infinite; }
+.ht-typing i:nth-child(2) { animation-delay: 150ms; }
+.ht-typing i:nth-child(3) { animation-delay: 300ms; }
+.ht-hcard__sources { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.ht-hcard__sources span {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 9px;
+  font-size: .6875rem;
+  font-weight: var(--ht-fw-semibold);
+  color: var(--ht-navy);
+  background: var(--ht-amber-50);
+  border-radius: var(--ht-radius-pill);
+}
+.ht-hcard__sources .ht-icon { width: 12px; height: 12px; }
+
+.ht-status { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 0; border-top: var(--ht-border); }
+.ht-status:first-child { border-top: 0; padding-top: 2px; }
+.ht-status--key { padding-block: 10px; }
+.ht-status--key .ht-status__k { font-size: .8125rem; font-weight: var(--ht-fw-bold); color: var(--ht-navy); }
+.ht-status--key .ht-status__v { font-size: .9375rem; }
+.ht-status__k { font-weight: var(--ht-fw-medium); color: var(--ht-navy-soft); }
+.ht-status__v { display: inline-flex; align-items: center; gap: 6px; font-weight: var(--ht-fw-bold); color: var(--ht-navy); text-align: right; }
+.ht-status__v .ht-icon { width: 14px; height: 14px; stroke-width: 2.5; color: var(--ht-red); }
+.ht-status__v--blocked { padding: 3px 12px; font-size: .8125rem; color: var(--ht-white); background: var(--ht-red); border-radius: var(--ht-radius-pill); }
+
+@media (min-width: 768px) {
+  .ht-hero__layer--ui { position: absolute; inset: 0; display: block; margin: 0; gap: 0; }
+  .ht-hero__brand {
+    display: block;
+    position: absolute;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .ht-hcard--chat {
+    display: block;
+    position: absolute;
+    top: 10%; left: -2%;
+    width: 268px;
+    z-index: 3;
+    animation: htRise 700ms 500ms var(--ht-ease) both, htFloat 7s 1200ms ease-in-out infinite;
+  }
+  .ht-hcard--status {
+    position: absolute;
+    right: -2%; bottom: 2%;
+    width: 268px;
+    z-index: 3;
+    animation: htRise 700ms 700ms var(--ht-ease) both, htFloatAlt 8s 1400ms ease-in-out infinite;
+  }
+}
+@media (min-width: 1025px) {
+  .ht-hero__grid { grid-template-columns: 45fr 55fr; gap: var(--ht-space-6); }
+  .ht-hcard--chat { top: 6%; left: -4%; width: 280px; }
+  .ht-hcard--status { right: -4%; bottom: 0; width: 280px; }
+}
+
+/* Hero keyframes */
+@keyframes htDrift { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-80px, 60px, 0); } }
+@keyframes htUnderline { from { background-size: 0 .1em; } to { background-size: 100% .1em; } }
+@keyframes htPing { 0% { transform: scale(1); opacity: .7; } 80%, 100% { transform: scale(2.8); opacity: 0; } }
+@keyframes htMarch { to { stroke-dashoffset: -180; } }
+@keyframes htPulse { 0%, 100% { opacity: 1; } 50% { opacity: .6; } }
+@keyframes htLayerIn { from { opacity: 0; transform: translateY(-24px); } to { opacity: 1; transform: none; } }
+@keyframes htPacket {
+  0%   { transform: translateY(0); opacity: 0; }
+  12%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { transform: translateY(-190px); opacity: 0; }
+}
+@keyframes htEscape {
+  0%       { transform: translate(0, 0); opacity: 0; }
+  10%      { opacity: 1; }
+  55%      { transform: translate(-84px, 44px); opacity: 1; }
+  60%, 100% { transform: translate(-84px, 44px); opacity: 0; }
+}
+@keyframes htBlocked {
+  0%, 54%  { opacity: 0; transform: scale(.4); }
+  60%      { opacity: 1; transform: scale(1.2); }
+  66%, 85% { opacity: 1; transform: scale(1); }
+  100%     { opacity: 0; transform: scale(1); }
+}
+@keyframes htRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+@keyframes htFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes htFloatAlt { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+@keyframes htTypingOut { 0%, 26% { opacity: 1; } 30%, 100% { opacity: 0; } }
+@keyframes htTextIn { 0%, 28% { opacity: 0; } 34%, 100% { opacity: 1; } }
+@keyframes htDot { 0%, 100% { transform: translateY(0); opacity: .4; } 50% { transform: translateY(-3px); opacity: 1; } }
+
+/* --------------------------------------------------------------------------
+   9. Start where your problem is — 7 × Icon Box widgets (class ht-tile)
+      inside a row container with class ht-tiles. Icon Box settings: icon
+      position Top, alignment Left, Title HTML tag "span", link on the box.
+   -------------------------------------------------------------------------- */
+.ht-start { color: var(--ht-white); background: var(--ht-ink); }
+.ht-start .ht-label .elementor-heading-title { color: var(--ht-white-64); text-align: center; }
+
+.ht-tiles { display: flex; flex-wrap: nowrap !important; gap: 12px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.ht-tiles::-webkit-scrollbar { display: none; }
+.ht-tiles > .elementor-element { flex: none; width: 156px; margin: 0 !important; }
+
+.ht-tile .elementor-icon-box-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
+  min-height: 116px;
+  padding: 14px;
+  text-align: left;
+  background: var(--ht-white-06);
+  border: var(--ht-border-dark);
+  border-radius: var(--ht-radius-lg);
+  transition: transform var(--ht-dur-hover) var(--ht-ease),
+              background-color var(--ht-dur-hover) var(--ht-ease),
+              border-color var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-tile:hover .elementor-icon-box-wrapper { transform: translateY(var(--ht-lift)); background: var(--ht-white-12); border-color: var(--ht-amber); }
+.ht-tile .elementor-icon-box-icon { margin: 0 !important; }
+.ht-tile .elementor-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  font-size: 22px;
+  color: var(--ht-white);
+  background: var(--ht-red);
+  border-radius: var(--ht-radius-md);
+  transition: transform var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-tile .elementor-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.5; }
+.ht-tiles > .elementor-element:nth-child(3n+2) .elementor-icon { color: var(--ht-ink); background: var(--ht-amber); }
+.ht-tiles > .elementor-element:nth-child(3n) .elementor-icon { background: var(--ht-navy-300); }
+.ht-tile:hover .elementor-icon { transform: rotate(-6deg) scale(1.06); }
+.ht-tile .elementor-icon-box-title,
+.ht-tile .elementor-icon-box-title a { margin: 0; font-size: 14px; font-weight: 600; line-height: 1.3; color: var(--ht-white); text-decoration: none; }
+.ht-tile .elementor-icon-box-title a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+
+@media (min-width: 1025px) {
+  .ht-tiles { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); overflow: visible; }
+  .ht-tiles > .elementor-element { width: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   10. Partner logos (Image Carousel)
+   -------------------------------------------------------------------------- */
+.ht-logos .swiper-slide { display: flex; align-items: center; justify-content: center; height: 56px; }
+.ht-logos .swiper-slide-image {
+  max-width: 160px; max-height: 56px; width: auto; height: auto;
+  object-fit: contain;
+  filter: none;
+  opacity: 1;
+  transition: transform var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-logos .swiper-slide:hover .swiper-slide-image { transform: scale(1.06); }
+
+/* --------------------------------------------------------------------------
+   11. AI in a Box — tick list (Icon List) and media
+   -------------------------------------------------------------------------- */
+.ht-ticks .elementor-icon-list-items { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 32px; }
+.ht-ticks .elementor-icon-list-item { align-items: flex-start; margin: 0 !important; padding: 0 !important; }
+.ht-ticks .elementor-icon-list-icon svg { width: 20px; height: 20px; fill: var(--ht-amber); color: var(--ht-amber); }
+.ht-ticks .elementor-icon-list-text { color: var(--ht-white); line-height: 1.6; }
+@media (max-width: 767px) { .ht-ticks .elementor-icon-list-items { grid-template-columns: 1fr; } }
+
+.ht-aibox-media img,
+.ht-aibox-media .elementor-lottie,
+.ht-aibox-media svg { border-radius: var(--ht-radius-lg); overflow: hidden; border: 1px solid var(--ht-white-16); }
+.ht-aibox__media { position: relative; border-radius: var(--ht-radius-lg); overflow: hidden; border: var(--ht-border-dark); box-shadow: var(--ht-shadow-float); }
+.ht-aibox__img { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.ht-aibox__overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: space-between; padding: var(--ht-space-2); pointer-events: none; }
+.ht-aibox__top { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.ht-aibox__badge { display: inline-flex; flex-direction: column; gap: 4px; padding: 10px 14px; background: var(--ht-white); border: var(--ht-border); border-radius: var(--ht-radius-md); box-shadow: var(--ht-shadow-2); }
+.ht-aibox__badge img { width: 140px; height: auto; border: 0; border-radius: 0; }
+.ht-aibox__badge-sub { font-size: .6875rem; font-weight: var(--ht-fw-bold); letter-spacing: .04em; text-transform: uppercase; color: var(--ht-slate); }
+.ht-aibox__pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; font-size: .75rem; font-weight: var(--ht-fw-bold); color: var(--ht-white); background: var(--ht-ink); border: var(--ht-border-dark); border-radius: var(--ht-radius-pill); box-shadow: var(--ht-shadow-2); }
+.ht-aibox__card { padding: 14px 16px; color: var(--ht-navy); background: var(--ht-white); border: var(--ht-border); border-radius: var(--ht-radius-md); box-shadow: var(--ht-shadow-float); }
+.ht-aibox__card-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.ht-aibox__card-eye { margin: 0; font-size: .6875rem; font-weight: var(--ht-fw-bold); letter-spacing: .06em; text-transform: uppercase; color: var(--ht-red); }
+.ht-aibox__card-title { margin: 0; font-size: .9375rem; font-weight: var(--ht-fw-bold); color: var(--ht-ink); }
+.ht-aibox__rows { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr; gap: 6px; }
+.ht-aibox__rows li { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 6px 10px; font-size: .75rem; font-weight: var(--ht-fw-semibold); color: var(--ht-ink); background: var(--ht-mist); border-radius: var(--ht-radius-sm); }
+.ht-aibox__tag { flex: none; padding: 2px 8px; font-size: .6875rem; font-weight: var(--ht-fw-bold); border-radius: var(--ht-radius-pill); }
+.ht-aibox__tag--navy  { color: var(--ht-navy); background: var(--ht-line); }
+.ht-aibox__tag--amber { color: var(--ht-ink);  background: var(--ht-amber-50); }
+.ht-aibox__tag--red   { color: var(--ht-red);  background: var(--ht-red-soft); }
+@media (min-width: 768px) {
+  .ht-aibox__overlay { padding: var(--ht-space-3); }
+  .ht-aibox__rows { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* --------------------------------------------------------------------------
+   12. The HyperThink difference (Tabs widget)
+   -------------------------------------------------------------------------- */
+.ht-tabs .elementor-tabs-wrapper { border-bottom: 1px solid var(--ht-line); }
+.ht-tabs .elementor-tab-desktop-title {
+  padding: 12px 24px 14px 0 !important;
+  font-size: 15px; font-weight: 700;
+  color: var(--ht-navy-soft);
+  border: 0 !important;
+  border-bottom: 3px solid transparent !important;
+  transition: color var(--ht-dur-hover) var(--ht-ease), border-color var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-tabs .elementor-tab-desktop-title:hover { color: var(--ht-red); }
+.ht-tabs .elementor-tab-desktop-title.elementor-active { color: var(--ht-navy); border-bottom-color: var(--ht-red) !important; }
+.ht-tabs .elementor-tab-desktop-title::before,
+.ht-tabs .elementor-tab-desktop-title::after { display: none !important; }
+
+.ht-tabs .elementor-tab-content {
+  margin-top: 32px;
+  padding: 32px;
+  background: var(--ht-white);
+  border: 1px solid var(--ht-line) !important;
+  border-radius: var(--ht-radius-lg);
+  box-shadow: var(--ht-shadow-1);
+}
+.ht-tabs .elementor-tab-content img { border-radius: var(--ht-radius-md); }
+
+.ht-tabs .elementor-tab-mobile-title {
+  min-height: 56px;
+  padding: 12px 0 !important;
+  font-size: 16px; font-weight: 700;
+  color: var(--ht-navy);
+  border: 0 !important;
+  border-bottom: 1px solid var(--ht-line) !important;
+}
+.ht-tabs .elementor-tab-mobile-title.elementor-active { color: var(--ht-red); }
+@media (max-width: 767px) {
+  .ht-tabs .elementor-tab-content { margin-top: 0; padding: 24px 0; background: none; border: 0 !important; box-shadow: none; }
+}
+
+/* Panel layout typed into the legacy Tabs content as HTML:
+   <div class="ht-tab-panel"><div><h3>…</h3><p>…</p></div><img …></div> */
+.ht-tab-panel { display: grid; gap: 24px; align-items: center; }
+.ht-tab-panel h3 { margin: 0 0 16px; font-size: clamp(1.25rem, 1.1rem + .3vw, 1.375rem); font-weight: 700; line-height: 1.25; color: var(--ht-navy); }
+.ht-tab-panel p { margin: 0; color: var(--ht-navy-soft); max-width: 68ch; }
+.ht-tab-panel img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--ht-radius-lg); border: var(--ht-border); box-shadow: var(--ht-shadow-2); }
+@media (min-width: 768px) { .ht-tab-panel { grid-template-columns: 5fr 6fr; gap: 48px; } }
+
+/* Nested Tabs (Elementor 3.10+, shown as "Tabs" when Nested Elements is active) */
+.ht-tabs .e-n-tabs-heading { border-bottom: 1px solid var(--ht-line); gap: 24px; }
+.ht-tabs .e-n-tab-title {
+  padding: 12px 0 14px;
+  background: none !important;
+  border: 0 !important;
+  border-bottom: 3px solid transparent !important;
+  font-size: 15px; font-weight: 700;
+  color: var(--ht-navy-soft);
+  transition: color var(--ht-dur-hover) var(--ht-ease), border-color var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-tabs .e-n-tab-title:hover { color: var(--ht-red); }
+.ht-tabs .e-n-tab-title[aria-selected="true"] { color: var(--ht-navy); border-bottom-color: var(--ht-red) !important; }
+.ht-tabs .e-n-tabs-content > .e-con {
+  margin-top: 32px;
+  padding: 32px;
+  background: var(--ht-white);
+  border: 1px solid var(--ht-line);
+  border-radius: var(--ht-radius-lg);
+  box-shadow: var(--ht-shadow-1);
+}
+@media (max-width: 767px) {
+  .ht-tabs .e-n-tab-title { min-height: 56px; border-bottom: 1px solid var(--ht-line) !important; }
+  .ht-tabs .e-n-tab-title[aria-selected="true"] { color: var(--ht-red); border-bottom-color: var(--ht-line) !important; }
+  .ht-tabs .e-n-tabs-content > .e-con { margin-top: 0; padding: 24px 0; background: none; border: 0; box-shadow: none; }
+}
+
+/* --------------------------------------------------------------------------
+   13. Card — one pattern everywhere (container with class .ht-card)
+   -------------------------------------------------------------------------- */
+.ht-card {
+  position: relative;
+  background: var(--ht-white);
+  border: 1px solid var(--ht-line);
+  border-radius: var(--ht-radius-md);
+  box-shadow: var(--ht-shadow-1);
+  transition: transform var(--ht-dur-hover) var(--ht-ease),
+              border-color var(--ht-dur-hover) var(--ht-ease),
+              box-shadow var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-card:hover { transform: translateY(-4px); border-color: var(--ht-red); box-shadow: var(--ht-shadow-2); }
+.ht-card:has(.ht-card-link a:focus-visible) { outline: 3px solid var(--ht-focus); outline-offset: 2px; }
+
+.ht-card .ht-card-icon .elementor-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px;
+  background: var(--ht-red-soft);
+  border-radius: var(--ht-radius-md);
+  transition: transform var(--ht-dur-hover) var(--ht-ease), background-color var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-card .ht-card-icon svg {
+  width: 24px; height: 24px;
+  fill: none; stroke: var(--ht-red); stroke-width: 1.5;
+  transition: stroke var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-card:nth-child(3n+2) .ht-card-icon .elementor-icon { background: var(--ht-amber-50); }
+.ht-card:nth-child(3n+2) .ht-card-icon svg { stroke: var(--ht-ink); }
+.ht-card:nth-child(3n) .ht-card-icon .elementor-icon { background: var(--ht-mist); }
+.ht-card:nth-child(3n) .ht-card-icon svg { stroke: var(--ht-navy); }
+.ht-card:hover .ht-card-icon .elementor-icon { background: var(--ht-red); transform: scale(1.06); }
+.ht-card:hover .ht-card-icon svg { stroke: var(--ht-white); }
+
+.ht-card .ht-card-title .elementor-heading-title { font-size: clamp(1.25rem, 1.1rem + .3vw, 1.375rem); font-weight: 700; line-height: 1.25; letter-spacing: -.01em; color: var(--ht-navy); }
+.ht-card .ht-card-desc, .ht-card .ht-card-desc p { color: var(--ht-navy-soft); font-size: 16px; line-height: 1.7; }
+
+/* "Explore →" is bottom-aligned and stretches over the whole card */
+.ht-card .ht-card-link { margin-top: auto; }
+.ht-card .ht-card-link a {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: var(--ht-touch-min);
+  font-size: 15px; font-weight: 700;
+  color: var(--ht-red);
+  text-decoration: none;
+}
+.ht-card .ht-card-link a::after { content: ""; position: absolute; inset: 0; border-radius: inherit; }
+.ht-card .ht-card-link a:focus-visible { outline: none; }
+
+/* Sub-item tags (Technology Services → AI card) sit above the stretched link */
+.ht-card .ht-card-tags a {
+  position: relative; z-index: 1;
+  display: inline-flex; align-items: center;
+  min-height: var(--ht-touch-min);
+  padding: 0 12px;
+  font-size: 14px; font-weight: 600;
+  color: var(--ht-navy);
+  border: 1px solid var(--ht-line);
+  border-radius: var(--ht-radius-sm);
+}
+.ht-card .ht-card-tags a:hover { color: var(--ht-red); border-color: var(--ht-red); }
+
+/* Media cards (industries, news): image flush to the top edge */
+.ht-card.ht-card--media { overflow: hidden; padding: 0 !important; }
+
+/* --------------------------------------------------------------------------
+   14. Media frame (Image widget with class .ht-duotone — crisp full-colour HD)
+   -------------------------------------------------------------------------- */
+.ht-duotone { position: relative; overflow: hidden; background: var(--ht-mist); border-radius: calc(var(--ht-radius-md) - 1px) calc(var(--ht-radius-md) - 1px) 0 0; }
+.ht-duotone img {
+  display: block; width: 100%; height: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: center;
+  filter: none;
+  transition: transform var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-card.ht-card--media:hover .ht-duotone img { transform: scale(1.03); }
+
+/* News row (Posts widget, skin "Cards") — same card + crisp full-colour treatment */
+.ht-news .elementor-post__card {
+  border: 1px solid var(--ht-line);
+  border-radius: var(--ht-radius-md);
+  box-shadow: var(--ht-shadow-1);
+  transition: transform var(--ht-dur-hover) var(--ht-ease), border-color var(--ht-dur-hover) var(--ht-ease), box-shadow var(--ht-dur-hover) var(--ht-ease);
+}
+.ht-news .elementor-post__card:hover { transform: translateY(-4px); border-color: var(--ht-red); box-shadow: var(--ht-shadow-2); }
+.ht-news .elementor-post__thumbnail { overflow: hidden; background: var(--ht-mist); }
+.ht-news .elementor-post__thumbnail img { filter: none; transition: transform var(--ht-dur-hover) var(--ht-ease); }
+.ht-news .elementor-post__card:hover .elementor-post__thumbnail img { transform: scale(1.03); }
+.ht-news .elementor-post__title, .ht-news .elementor-post__title a { font-size: clamp(1.25rem, 1.1rem + .3vw, 1.375rem); font-weight: 700; line-height: 1.25; color: var(--ht-navy); }
+.ht-news .elementor-post__read-more { display: inline-flex; align-items: center; min-height: var(--ht-touch-min); font-size: 15px; font-weight: 700; color: var(--ht-red); }
+
+/* --------------------------------------------------------------------------
+   15. Proof band (Counter widget)
+   -------------------------------------------------------------------------- */
+.ht-stat { padding-left: 16px; border-left: 2px solid var(--ht-amber); }
+.ht-stat .elementor-counter-number-wrapper {
+  justify-content: flex-start;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+  color: var(--ht-amber);
+  font-variant-numeric: tabular-nums;
+}
+.ht-stat .elementor-counter-title { text-align: left; font-size: 16px; line-height: 1.6; color: var(--ht-white); }
+.ht-stats-caption, .ht-stats-caption p { font-size: 14px; color: var(--ht-white-64); }
+
+/* --------------------------------------------------------------------------
+   16. Footer
+   -------------------------------------------------------------------------- */
+.ht-footer { background: var(--ht-navy); color: var(--ht-white-82); font-size: 15px; }
+.ht-footer a { display: inline-flex; align-items: center; min-height: var(--ht-touch-min); color: var(--ht-white-82); text-decoration: none; }
+.ht-footer a:hover { color: var(--ht-white); text-decoration: underline; }
+.ht-footer .ht-footer-heading .elementor-heading-title { font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ht-white); }
+.ht-footer .elementor-social-icon {
+  width: var(--ht-touch-min); height: var(--ht-touch-min);
+  background: transparent !important;
+  border: 1px solid var(--ht-white-16);
+  border-radius: var(--ht-radius-sm);
+}
+.ht-footer .elementor-social-icon:hover { background: var(--ht-white) !important; }
+.ht-footer .elementor-social-icon:hover svg { fill: var(--ht-navy); }
+.ht-footer .elementor-field-group input[type="email"] {
+  min-height: var(--ht-touch-min);
+  color: var(--ht-white);
+  background: var(--ht-white-08);
+  border: 1px solid var(--ht-white-16);
+  border-radius: var(--ht-radius-sm);
+}
+.ht-footer .elementor-field-group input::placeholder { color: var(--ht-white-64); }
+.ht-footer-legal { border-top: 1px solid var(--ht-white-16); font-size: 14px; color: var(--ht-white-64); }
+
+/* --------------------------------------------------------------------------
+   17. Entrance animation — normalise Elementor "Fade In Up" to the motion spec
+       (24px travel, 500ms, ease-out). Scoped to HyperThink sections only.
+   -------------------------------------------------------------------------- */
+@keyframes htFadeInUp {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+.ht-section .animated.fadeInUp,
+.ht-footer .animated.fadeInUp {
+  animation-name: htFadeInUp;
+  animation-duration: 500ms;
+  animation-timing-function: ease-out;
+}
+
+/* Disable 3D tilt below desktop (Elementor applies it via inline transform) */
+@media (max-width: 1024px) {
+  .ht-aibox-media { transform: none !important; }
+}
+
+/* --------------------------------------------------------------------------
+   18. Reduced motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .elementor-invisible { visibility: visible !important; }
+  .ht-card:hover { transform: none; }
+  .ht-art__packet, .ht-art__blocked { animation: none !important; opacity: 1; }
+  .ht-typing { display: none; }
+  .ht-hero__layer { transition: none; }
+}
